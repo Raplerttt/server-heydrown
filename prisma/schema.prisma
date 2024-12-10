@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement()) // ID otomatis
+  username  String   @unique                      // Unik, tidak boleh ada duplikat
+  email     String   @unique                      // Unik, email harus berbeda
+  profilePicture String? // Foto profil, bisa kosong (optional)
+  password  String   // Simpan password yang telah dihash
+  createdAt DateTime @default(now())              // Tanggal pembuatan akun
+  updatedAt DateTime @updatedAt                   // Tanggal update terakhir
+}
